@@ -1,0 +1,122 @@
+vtype	int
+id	add
+lparen	
+vtype	int
+id	a
+comma	
+vtype	int
+id	b
+rparen	
+lbrace	
+vtype	int
+id	c
+semi	
+id	c
+assign	
+id	a
+addsub	
+id	b
+semi	
+RETURN	return
+id	c
+semi	
+rbrace	
+vtype	int
+id	add10
+lparen	
+vtype	int
+id	a
+rparen	
+lbrace	
+vtype	int
+id	c
+assign	
+num	10
+semi	
+while	while
+lparen	
+id	c
+comp	!=
+num	0
+rparen	
+lbrace	
+id	a
+assign	
+id	a
+addsub	
+num	1
+semi	
+id	c
+assign	
+id	c
+addsub	
+num	1
+semi	
+rbrace	
+RETURN	return
+id	a
+semi	
+rbrace	
+vtype	int
+id	main
+lparen	
+vtype	int
+id	arg1
+comma	
+vtype	char
+id	arg2
+rparen	
+lbrace	
+vtype	int
+id	a
+comma	
+id	b
+semi	
+vtype	int
+id	c
+semi	
+vtype	char
+id	str
+semi	
+id	a
+assign	
+num	10
+semi	
+id	b
+assign	
+num	20
+semi	
+id	c
+assign	
+id	add
+lparen	
+id	a
+comma	
+id	b
+rparen	
+semi	
+if	if
+lparen	
+id	c
+comp	>
+num	10
+rparen	
+lbrace	
+id	str
+assign	
+literal	A
+semi	
+rbrace	
+else	else
+id	str
+assign	
+literal	B
+semi	
+id	a
+assign	
+id	add10
+lparen	
+id	a
+rparen	
+semi	
+rbrace	
