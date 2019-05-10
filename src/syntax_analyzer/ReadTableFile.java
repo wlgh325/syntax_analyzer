@@ -3,7 +3,6 @@ package syntax_analyzer;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Set;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -12,16 +11,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class ReadTableFile {
 	//SLR-TABLE
-	public HashMap<Integer, HashMap<String, String>> slrTable;
+	private HashMap<Integer, HashMap<String, String>> slrTable;
 	
 	private String path;
 	private int totalRow;
 	private int totalColumn;
 
 	// Constructor
-	ReadTableFile() {
+	ReadTableFile(String path) {
 		slrTable = new HashMap<Integer, HashMap<String, String>>();
-		this.path = "./SLRTableFile.xls";
+		this.path = path;
 		this.totalRow = 0;
 		this.totalColumn = 0;
 	}
@@ -32,29 +31,28 @@ public class ReadTableFile {
 
 		int rowindex = 0;
 		int columnindex = 0;
-		int num = 0;
 
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
-			HSSFSheet sheet = workbook.getSheetAt(i); // sheet »ý¼º
+			HSSFSheet sheet = workbook.getSheetAt(i); // sheet ï¿½ï¿½ï¿½ï¿½
 
-			// ÇàÀÇ ¼ö
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 			totalRow = sheet.getPhysicalNumberOfRows();
 			for (rowindex = 1; rowindex < totalRow; rowindex++) {
-				// ÇàÀ» ÀÐ´Â´Ù
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½
 				HSSFRow row = sheet.getRow(rowindex);
 				if (row != null) {
-					// ¼¿ÀÇ ¼ö
+					// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 					totalColumn = row.getPhysicalNumberOfCells();
 					HashMap<String,String> curRowHash = new HashMap<String,String>();
 					for (columnindex = 1; columnindex <= totalColumn; columnindex++) {
-						// ¼¿°ªÀ» ÀÐ´Â´Ù
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½
 						HSSFCell cell = sheet.getRow(rowindex).getCell((short) columnindex);
 						String value = "";
-						// ¼¿ÀÌ ºó°ªÀÏ°æ¿ì¸¦ À§ÇÑ ³ÎÃ¼Å©
+						// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ì¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼Å©
 						if (cell == null) {
 							continue;
 						} else {
-							// º§·ù°¡ ¹ºÁö ¹Þ¾Æ¿À±â
+							// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 							switch (cell.getCellType()) {
 							case HSSFCell.CELL_TYPE_FORMULA:
 								value = cell.getCellFormula();
@@ -71,9 +69,9 @@ public class ReadTableFile {
 								continue;
 							}
 							if(columnindex<19) {
-								String nonterminal ="";
-								nonterminal = columnIndexToNonTerminal(columnindex);
-								curRowHash.put(nonterminal,value);
+								String nonTerminal ="";
+								nonTerminal = columnIndexToNonTerminal(columnindex);
+								curRowHash.put(nonTerminal,value);
 							}else {
 								String terminal ="";
 								terminal = columnIndexToTerminal(columnindex);
@@ -192,6 +190,7 @@ public class ReadTableFile {
 		}
 		return nonTerminal;
 	}
+	
 	public void printSTRtable() {
 		for(Integer key : this.slrTable.keySet()) {
 			System.out.println(key + "rowindex : ");
@@ -200,5 +199,9 @@ public class ReadTableFile {
 			}
 			System.out.println("");
 		}
+	}
+
+	HashMap<Integer, HashMap<String, String>> getSLRTable(){
+		return slrTable;
 	}
 }
