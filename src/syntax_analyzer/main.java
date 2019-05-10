@@ -9,6 +9,7 @@ public class main {
 		ReadTableFile file = new ReadTableFile();
 		try {
 			file.readExcel();
+			file.printSTRtable();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

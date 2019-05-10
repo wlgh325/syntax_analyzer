@@ -3,6 +3,7 @@ package syntax_analyzer;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -19,7 +20,7 @@ public class ReadTableFile {
 
 	// Constructor
 	ReadTableFile() {
-
+		slrTable = new HashMap<Integer, HashMap<String, String>>();
 		this.path = "./SLRTableFile.xls";
 		this.totalRow = 0;
 		this.totalColumn = 0;
@@ -45,7 +46,7 @@ public class ReadTableFile {
 					// ¼¿ÀÇ ¼ö
 					totalColumn = row.getPhysicalNumberOfCells();
 					HashMap<String,String> curRowHash = new HashMap<String,String>();
-					for (columnindex = 0; columnindex <= totalColumn; columnindex++) {
+					for (columnindex = 1; columnindex <= totalColumn; columnindex++) {
 						// ¼¿°ªÀ» ÀÐ´Â´Ù
 						HSSFCell cell = sheet.getRow(rowindex).getCell((short) columnindex);
 						String value = "";
@@ -67,11 +68,19 @@ public class ReadTableFile {
 							case HSSFCell.CELL_TYPE_BLANK:
 								continue;
 							case HSSFCell.CELL_TYPE_ERROR:
-								value = cell.getErrorCellValue() + "";
-								break;
+								continue;
+							}
+							if(columnindex<19) {
+								String nonterminal ="";
+								nonterminal = columnIndexToNonTerminal(columnindex);
+								curRowHash.put(nonterminal,value);
+							}else {
+								String terminal ="";
+								terminal = columnIndexToTerminal(columnindex);
 							}
 						}
 					}
+					this.slrTable.put(rowindex,curRowHash);
 				}
 
 			}
@@ -81,43 +90,43 @@ public class ReadTableFile {
 	public String columnIndexToTerminal(int column) {
 		String terminal = "";
 		switch(column) {
-		case 1:
+		case 19:
 			terminal = "CODE";
 			break;
-		case 2:
+		case 20:
 			terminal = "VDECL";
 			break;
-		case 3:
+		case 21:
 			terminal = "FDECL";
 			break;
-		case 4:
+		case 22:
 			terminal = "ARG";
 			break;
-		case 5:
+		case 23:
 			terminal = "MOREARG";
 			break;
-		case 6:
+		case 24:
 			terminal = "BLOCK";
 			break;
-		case 7:
+		case 25:
 			terminal = "STMT";
 			break;
-		case 8:
+		case 26:
 			terminal = "RHS";
 			break;
-		case 9:
+		case 27:
 			terminal = "EXPR";
 			break;
-		case 10:
+		case 28:
 			terminal = "TERM";
 			break;
-		case 11:
+		case 29:
 			terminal = "FACTOR";
 			break;
-		case 12:
+		case 30:
 			terminal = "CON";
 			break;
-		case 13:
+		case 31:
 			terminal = "FCALL";
 			break;
 		}
@@ -127,69 +136,69 @@ public class ReadTableFile {
 		String nonTerminal = "";
 		switch(column) {
 		case 1:
-			nonTerminal = "INT";
+			nonTerminal = "vtype";
 			break;
 		case 2:
-			nonTerminal = "CHAR";
+			nonTerminal = "num";
 			break;
 		case 3:
-			nonTerminal = "INTEGER";
+			nonTerminal = "literal";
 			break;
 		case 4:
-			nonTerminal = "LITERAL";
+			nonTerminal = "id";
 			break;
 		case 5:
-			nonTerminal = "IDENTIFIEL";
+			nonTerminal = "if";
 			break;
 		case 6:
-			nonTerminal = "IF";
+			nonTerminal = "else";
 			break;
 		case 7:
-			nonTerminal = "ELSE";
+			nonTerminal = "while";
 			break;
 		case 8:
-			nonTerminal = "WHILE";
+			nonTerminal = "addsub";
 			break;
 		case 9:
-			nonTerminal = "ADD_OPERATION";
+			nonTerminal = "multdiv";
 			break;
 		case 10:
-			nonTerminal = "SUB_OPERATION";
+			nonTerminal = "assign";
 			break;
 		case 11:
-			nonTerminal = "MULTI_OPERATION";
+			nonTerminal = "comp";
 			break;
 		case 12:
-			nonTerminal = "DIV_OPERATION";
+			nonTerminal = "semi";
 			break;
 		case 13:
-			nonTerminal = "ASSIGNMENT_OPERATION";
+			nonTerminal = "comma";
 			break;
 		case 14:
-			nonTerminal = "COMPARSION_OPERATION";
+			nonTerminal = "lparen";
 			break;
 		case 15:
-			nonTerminal = "SEMICOLON";
+			nonTerminal = "rparen";
 			break;
 		case 16:
-			nonTerminal = "COMMA";
+			nonTerminal = "lbrace";
 			break;
 		case 17:
-			nonTerminal = "LPAREN";
+			nonTerminal = "rbrace";
 			break;
 		case 18:
-			nonTerminal = "RPAREN";
-			break;
-		case 19:
-			nonTerminal = "LBRACKET";
-			break;
-		case 20:
-			nonTerminal = "RBRACKET";
-			break;
-		case 21:
 			nonTerminal = "ENDMARKER";
 			break;
 		}
 		return nonTerminal;
+	}
+	public void printSTRtable() {
+		for(Integer key : this.slrTable.keySet()) {
+			System.out.println(key + "rowindex : ");
+			for(String k : this.slrTable.get(key).keySet()) {
+				System.out.print("("+k+"," +this.slrTable.get(key).get(k)+")");
+			}
+			System.out.println("");
+		}
 	}
 }
