@@ -39,6 +39,7 @@ public class Syntax_analyzer {
 			// Finds a value in the table that matches the state (row) and the next symbol (column).
 			String action = slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex));
 			System.out.println(action);
+			System.out.println(this.stateStack);
 			if (action.charAt(0) == 'R') {
 				int reduceProductionIndex = Integer.parseInt(action.substring(1));
 				int statePopNum;
@@ -57,7 +58,11 @@ public class Syntax_analyzer {
 
 				String LHS = this.production.get(reduceProductionIndex).getLHS();
 				this.symbolTable.add(this.nextSymbolIndex-1, LHS);
-
+				if(LHS.equals("S") && this.symbolTable.size() == 2) {
+					// end condition
+					System.out.println("finish!! your code is accepted.!!");
+					break;
+				}
 				action = this.slrTable.get(this.currentState).get(LHS);
 
 				this.currentState = Integer.parseInt(action);
@@ -71,10 +76,7 @@ public class Syntax_analyzer {
 
 				this.nextSymbolIndex++;
 			}
-			if(this.symbolTable.get(0).equals("S") && this.symbolTable.size() == 2) {
-				// end condition
-				break;
-			}
+
 		}
 	}
 }

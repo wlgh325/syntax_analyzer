@@ -123,7 +123,7 @@ public class ReadTableFile {
 			terminal = "FACTOR";
 			break;
 		case 30:
-			terminal = "CON";
+			terminal = "COND";
 			break;
 		case 31:
 			terminal = "FCALL";

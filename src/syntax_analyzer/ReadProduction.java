@@ -26,8 +26,8 @@ public class ReadProduction{
         
         String line = "";
         Production trashProduction = new Production(null,null);
-        
         this.production_arr.add(trashProduction);
+        int singleCh = filereader.read();
         while((line = bufReader.readLine()) != null){
         	String[] split_str;
         	split_str = line.split("→");	// split lhs and rhs of production
@@ -60,7 +60,7 @@ public class ReadProduction{
 	        	symbol_temp = line.split("\t");
 	        	symbolTable.add(symbol_temp[0]);
 	        }
-	        
+	        symbolTable.add("ENDMARKER");
 	        bufReader.close();
 	}
 	
