@@ -28,6 +28,6 @@ public class Main {
 		
 		// Do SLR parsing
 		Syntax_analyzer syntaxAnalyzer = new Syntax_analyzer(slrTable, symbolTable, production);
-		
+		syntaxAnalyzer.analyze();
 	}
 }

@@ -6,8 +6,8 @@ VDECL→vtype id semi
 FDECL→vtype id lparen ARG rparen lbrace BLOCK rbrace
 ARG→vtype id MOREARGS 
 ARG→ϵ
-MOREARGS→comma vtype id MOREARGS
-MOREARGS→ϵ
+MOREARG→comma vtype id MOREARG
+MOREARG→ϵ
 BLOCK→STMT BLOCK
 BLOCK→ϵ
 STMT→VDECL

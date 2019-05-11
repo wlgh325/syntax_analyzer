@@ -25,7 +25,9 @@ public class ReadProduction{
         BufferedReader bufReader = new BufferedReader(filereader);
         
         String line = "";
+        Production trashProduction = new Production(null,null);
         
+        this.production_arr.add(trashProduction);
         while((line = bufReader.readLine()) != null){
         	String[] split_str;
         	split_str = line.split("→");	// split lhs and rhs of production

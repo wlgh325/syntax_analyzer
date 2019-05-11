@@ -58,7 +58,7 @@ public class ReadTableFile {
 								value = cell.getCellFormula();
 								break;
 							case HSSFCell.CELL_TYPE_NUMERIC:
-								value = cell.getNumericCellValue() + "";
+								value = (int)cell.getNumericCellValue()+ "";
 								break;
 							case HSSFCell.CELL_TYPE_STRING:
 								value = cell.getStringCellValue() + "";
@@ -75,6 +75,7 @@ public class ReadTableFile {
 							}else {
 								String terminal ="";
 								terminal = columnIndexToTerminal(columnindex);
+								curRowHash.put(terminal,value);
 							}
 						}
 					}
