@@ -33,40 +33,41 @@ public class ReadTableFile {
 		int columnindex = 0;
 
 		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
-			HSSFSheet sheet = workbook.getSheetAt(i); // sheet ����
+			HSSFSheet sheet = workbook.getSheetAt(i); // read sheet 
 
-			// ���� ��
+			// total number of row in excel file
 			totalRow = sheet.getPhysicalNumberOfRows();
 			for (rowindex = 1; rowindex < totalRow; rowindex++) {
-				// ���� �д´�
+				// get one row at a time 
 				HSSFRow row = sheet.getRow(rowindex);
 				if (row != null) {
-					// ���� ��
+					// total number of column in excel file
 					totalColumn = row.getPhysicalNumberOfCells();
 					HashMap<String,String> curRowHash = new HashMap<String,String>();
 					for (columnindex = 1; columnindex <= totalColumn; columnindex++) {
-						// ������ �д´�
+						// get one cell at a time
 						HSSFCell cell = sheet.getRow(rowindex).getCell((short) columnindex);
 						String value = "";
-						// ���� �����ϰ��츦 ���� ��üũ
+						
+						// when the cell contains nothing ( cell is null )
 						if (cell == null) {
 							continue;
 						} else {
-							// ������ ���� �޾ƿ���
+							// get values based on data type
 							switch (cell.getCellType()) {
-							case HSSFCell.CELL_TYPE_FORMULA:
-								value = cell.getCellFormula();
-								break;
-							case HSSFCell.CELL_TYPE_NUMERIC:
-								value = (int)cell.getNumericCellValue()+ "";
-								break;
-							case HSSFCell.CELL_TYPE_STRING:
-								value = cell.getStringCellValue() + "";
-								break;
-							case HSSFCell.CELL_TYPE_BLANK:
-								continue;
-							case HSSFCell.CELL_TYPE_ERROR:
-								continue;
+								case HSSFCell.CELL_TYPE_FORMULA:
+									value = cell.getCellFormula();
+									break;
+								case HSSFCell.CELL_TYPE_NUMERIC:
+									value = (int)cell.getNumericCellValue()+ "";
+									break;
+								case HSSFCell.CELL_TYPE_STRING:
+									value = cell.getStringCellValue() + "";
+									break;
+								case HSSFCell.CELL_TYPE_BLANK:
+									continue;
+								case HSSFCell.CELL_TYPE_ERROR:
+									continue;
 							}
 							if(columnindex<19) {
 								String nonTerminal ="";
@@ -79,13 +80,13 @@ public class ReadTableFile {
 							}
 						}
 					}
+					// Put the value in HashMap
 					this.slrTable.put(rowindex,curRowHash);
 				}
-
 			}
 		}
-
 	}
+	
 	public String columnIndexToTerminal(int column) {
 		String terminal = "";
 		switch(column) {

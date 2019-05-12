@@ -26,8 +26,8 @@ public class ReadProduction{
         
         String line = "";
         Production trashProduction = new Production(null,null);
-        this.production_arr.add(trashProduction);
-        int singleCh = filereader.read();
+        this.production_arr.add(trashProduction);	// To start with 1 index, add null production instance
+        
         while((line = bufReader.readLine()) != null){
         	String[] split_str;
         	split_str = line.split("→");	// split lhs and rhs of production
@@ -37,7 +37,7 @@ public class ReadProduction{
         	
         	String[] temp_second;
         	temp_second = split_str[1].split(" ");
-        	production.setRHS(temp_second);	//stor the rhs
+        	production.setRHS(temp_second);	//store the rhs
         	this.production_arr.add(production);
         }
         

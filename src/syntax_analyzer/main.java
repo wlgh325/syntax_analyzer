@@ -8,18 +8,18 @@ public class Main {
 
 	public static void main(String[] args) throws IOException{
 		// File path
-		String productionFile = "./src/Docs/Transition.txt";
-		String symbolTableFile = "./src/Docs/test.c.out";
-		String slrTableExcelFile = "./src/Docs/SLRTableFile.xls";
-		
-		// Declare transition table and production class
+		String productionFile = "./docs/Transition.txt";
+		String symbolTableFile = args[0];
+		String slrTableExcelFile = "./docs/SLRTableFile.xls";
+
+		// Read excel file which contains SLR table
 		ReadTableFile readTableFile = new ReadTableFile(slrTableExcelFile);
-		ReadProduction readProduction = new ReadProduction(); 
+		readTableFile.readExcel();	
 		
-		// Read production, symbol table and SLR table
+		// Read production and symbol table
+		ReadProduction readProduction = new ReadProduction(); 		
 		readProduction.readProduction(productionFile);	
-		readProduction.readSymbolTableFile(symbolTableFile);
-		readTableFile.readExcel();	//read excel file which contains information symbol table
+		readProduction.readSymbolTableFile(symbolTableFile);	
 		
 		// Store information to analyze syntax
 		ArrayList<String> symbolTable = readProduction.getSymbolTable();
