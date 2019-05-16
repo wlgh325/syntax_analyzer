@@ -22,7 +22,7 @@ public class Main {
 		readProduction.readSymbolTableFile(symbolTableFile);	
 		
 		// Store information to analyze syntax
-		ArrayList<String> symbolTable = readProduction.getSymbolTable();
+		ArrayList<SymbolTable> symbolTable = readProduction.getSymbolTable();
 		ArrayList<Production> production = readProduction.getProductionList();
 		HashMap<Integer, HashMap<String, String>> slrTable = readTableFile.getSLRTable();
 		

@@ -7,7 +7,7 @@ import java.util.Stack;
 public class Syntax_analyzer {
 	// STR-table
 	private HashMap<Integer, HashMap<String, String>> slrTable;
-	private ArrayList<String> symbolTable;
+	private ArrayList<SymbolTable> symbolTable;
 	private ArrayList<Production> production;
 	//
 	private Stack<Integer> stateStack;
@@ -17,7 +17,7 @@ public class Syntax_analyzer {
 
 	private char act;
 
-	Syntax_analyzer(HashMap<Integer, HashMap<String, String>> slrTable, ArrayList<String> symbolTable,
+	Syntax_analyzer(HashMap<Integer, HashMap<String, String>> slrTable, ArrayList<SymbolTable> symbolTable,
 			ArrayList<Production> production) {
 		this.slrTable = slrTable;
 		this.symbolTable = symbolTable;
@@ -31,13 +31,13 @@ public class Syntax_analyzer {
 	public void analyze() {
 		int count = 0;
 		while (true) {
-			if(slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex))==null) {
+			if(slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex).getSymbol()[0])==null) {
 				//error checking
-				System.out.println("systax error");
+				System.out.println("systax error  " +"line: " + this.symbolTable.get(this.nextSymbolIndex).getLineNum() +", index: "+ this.symbolTable.get(this.nextSymbolIndex).getLineIndex());
 				break;
 			}
 			// Finds a value in the table that matches the state (row) and the next symbol (column).
-			String action = slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex));
+			String action = slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex).getSymbol()[0]);
 			System.out.println(action);
 			System.out.println(this.stateStack);
 			if (action.charAt(0) == 'R') {
@@ -57,7 +57,8 @@ public class Syntax_analyzer {
 				this.currentState = this.stateStack.lastElement();
 
 				String LHS = this.production.get(reduceProductionIndex).getLHS();
-				this.symbolTable.add(this.nextSymbolIndex-1, LHS);
+				SymbolTable temp = new SymbolTable(new String[] {LHS,null},-1,-1);
+				this.symbolTable.add(this.nextSymbolIndex-1,temp);
 				if(LHS.equals("S") && this.symbolTable.size() == 2) {
 					// end condition
 					System.out.println("finish!! your code is accepted.!!");
