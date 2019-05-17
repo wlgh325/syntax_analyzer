@@ -37,35 +37,37 @@ comp	>=
 num	1
 rparen	
 lbrace	
-if	if
+while	while
 lparen	
-id	b
-comp	<
+id	a
+comp	==
 num	1
 rparen	
 lbrace	
 id	a
 assign	
-id	a
-addsub	
+num	1
+semi	
+if	if
+lparen	
 id	b
+comp	<=
+num	1
+rparen	
+lbrace	
+id	a
+assign	
+num	2
 semi	
 rbrace	
 else	else
 lbrace	
-id	a
-assign	
-id	a
-multdiv	
 id	b
+assign	
+num	2
 semi	
 rbrace	
-id	a
-assign	
-id	a
-multdiv	
-id	b
-semi	
+rbrace	
 rbrace	
 else	else
 lbrace	

@@ -39,10 +39,13 @@ public class ReadTableFile {
 			totalRow = sheet.getPhysicalNumberOfRows();
 			for (rowindex = 1; rowindex < totalRow; rowindex++) {
 				// ���� �д´�
+				if(rowindex== totalRow -1) {
+					System.out.println("stop");
+				}
 				HSSFRow row = sheet.getRow(rowindex);
 				if (row != null) {
 					// ���� ��
-					totalColumn = row.getPhysicalNumberOfCells();
+					totalColumn = row.getLastCellNum();
 					HashMap<String,String> curRowHash = new HashMap<String,String>();
 					for (columnindex = 1; columnindex <= totalColumn; columnindex++) {
 						// ������ �д´�

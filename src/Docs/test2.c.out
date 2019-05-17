@@ -1,0 +1,23 @@
+vtype	char
+id	main
+lparen	
+vtype	char
+id	test
+rparen	
+lbrace	
+vtype	char
+id	literal
+semi	
+while	while
+lparen	
+id	test
+comp	>=
+num	1
+rparen	
+lbrace	
+id	literal
+assign	
+literal	syntax test!!
+semi	
+rbrace	
+rbrace	

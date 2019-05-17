@@ -29,7 +29,6 @@ public class Syntax_analyzer {
 	}
 
 	public void analyze() {
-		int count = 0;
 		while (true) {
 			if(slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex))==null) {
 				//error checking
@@ -38,8 +37,8 @@ public class Syntax_analyzer {
 			}
 			// Finds a value in the table that matches the state (row) and the next symbol (column).
 			String action = slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex));
-			System.out.println(action);
-			System.out.println(this.stateStack);
+//			System.out.println(action);
+//			System.out.println(this.stateStack);
 			if (action.charAt(0) == 'R') {
 				int reduceProductionIndex = Integer.parseInt(action.substring(1));
 				int statePopNum;

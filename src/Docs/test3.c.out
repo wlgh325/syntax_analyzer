@@ -1,0 +1,44 @@
+vtype	int
+id	main
+lparen	
+rparen	
+lbrace	
+vtype	int
+id	a
+semi	
+vtype	int
+id	b
+semi	
+vtype	int
+id	c
+semi	
+vtype	int
+id	d
+semi	
+id	a
+assign	
+num	10
+semi	
+id	b
+assign	
+num	20
+semi	
+id	c
+assign	
+num	30
+semi	
+id	d
+assign	
+lparen	
+id	a
+addsub	
+num	10
+rparen	
+multdiv	
+num	-10
+multdiv	
+num	30
+addsub	
+num	20
+semi	
+rbrace	

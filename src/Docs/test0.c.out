@@ -1,0 +1,30 @@
+vtype	int
+id	set
+lparen	
+vtype	int
+id	b
+comma	
+vtype	int
+id	c
+rparen	
+lbrace	
+vtype	int
+id	a
+semi	
+vtype	int
+id	d
+semi	
+id	a
+assign	
+num	2
+addsub	
+id	c
+semi	
+id	d
+assign	
+id	b
+semi	
+rbrace	
+vtype	int
+id	test
+semi	
