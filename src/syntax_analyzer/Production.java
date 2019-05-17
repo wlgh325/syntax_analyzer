@@ -4,11 +4,12 @@ public class Production {
 	private String lhs;	// Left hand side of Production
 	private String [] rhs;	// Right hand side of Production
 	
+	
 	// default Constructor
 	Production(){
 		
 	}
-	
+		
 	// Constructor
 	Production(String lhs, String [] rhs){
 		this.lhs = lhs;
@@ -30,11 +31,11 @@ public class Production {
 	/////////////
 	///Setter////
 	/////////////
-	void setLHS(String first) {
-		this.lhs = first;
+	void setLHS(String lhs) {
+		this.lhs = lhs;
 	}
 	
-	void setRHS(String[] second) {
-		this.rhs = second;
+	void setRHS(String[] rhs) {
+		this.rhs = rhs;
 	}
 }

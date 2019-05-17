@@ -13,7 +13,7 @@ public class ReadProduction{
 	
 	// Store production and symbol table
 	private ArrayList<Production> production_arr = new ArrayList();
-	private ArrayList<String> symbolTable = new ArrayList();
+	private ArrayList<SymbolTable> symbolTable = new ArrayList();
 	
 	void readProduction(String productionFileName) throws IOException{
 		File file = new File(productionFileName);
@@ -26,18 +26,22 @@ public class ReadProduction{
         
         String line = "";
         Production trashProduction = new Production(null,null);
-        this.production_arr.add(trashProduction);
-        int singleCh = filereader.read();
+        this.production_arr.add(trashProduction);	// To start with 1 index, add null production instance
+        
+        // Remove trash buffer in first
+        int singlech = filereader.read();
+        
         while((line = bufReader.readLine()) != null){
         	String[] split_str;
         	split_str = line.split("→");	// split lhs and rhs of production
         	
         	Production production = new Production();
+
         	production.setLHS(split_str[0]);	//store the lhs
         	
         	String[] temp_second;
         	temp_second = split_str[1].split(" ");
-        	production.setRHS(temp_second);	//stor the rhs
+        	production.setRHS(temp_second);	//store the rhs
         	this.production_arr.add(production);
         }
         
@@ -58,9 +62,14 @@ public class ReadProduction{
 	        while((line = bufReader.readLine()) != null){
 	        	String[] symbol_temp;
 	        	symbol_temp = line.split("\t");
-	        	symbolTable.add(symbol_temp[0]);
+	        	String [] temp_str = new String[] {symbol_temp[0],symbol_temp[1]};
+	        	
+	        	SymbolTable temp = new SymbolTable(temp_str,Integer.parseInt(symbol_temp[2]),Integer.parseInt(symbol_temp[3]));
+	        	symbolTable.add(temp);
+	        	
 	        }
-	        symbolTable.add("ENDMARKER");
+	        SymbolTable temp = new SymbolTable(new String[] {"ENDMARKER",null} ,-1,-1) ;
+	        symbolTable.add(temp);
 	        bufReader.close();
 	}
 	
@@ -71,7 +80,7 @@ public class ReadProduction{
 		return production_arr;
 	}
 	
-	ArrayList<String> getSymbolTable() {
+	ArrayList<SymbolTable> getSymbolTable() {
 		return symbolTable;
 	}
 }
