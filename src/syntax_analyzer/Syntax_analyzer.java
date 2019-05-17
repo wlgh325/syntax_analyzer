@@ -15,7 +15,6 @@ public class Syntax_analyzer {
 	private int currentState;
 	private int nextSymbolIndex;
 
-	private char act;
 
 	Syntax_analyzer(HashMap<Integer, HashMap<String, String>> slrTable, ArrayList<SymbolTable> symbolTable,
 			ArrayList<Production> production) {
@@ -32,17 +31,15 @@ public class Syntax_analyzer {
 		while (true) {
 			if(slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex).getSymbol()[0])==null) {
 				//error checking
-				System.out.println("systax error  " +"line: " + this.symbolTable.get(this.nextSymbolIndex).getLineNum() +", index: "+ this.symbolTable.get(this.nextSymbolIndex).getLineIndex());
+				System.out.println("Symbol '"+this.symbolTable.get(this.nextSymbolIndex).getSymbol()+", is syntax error" +"line: " + this.symbolTable.get(this.nextSymbolIndex).getLineNum() +", index: "+ this.symbolTable.get(this.nextSymbolIndex).getLineIndex());
 				break;
 			}
 			// Finds a value in the table that matches the state (row) and the next symbol (column).
 			String action = slrTable.get(this.currentState).get(this.symbolTable.get(this.nextSymbolIndex).getSymbol()[0]);
-			System.out.println(action);
-			System.out.println(this.stateStack);
 			if (action.charAt(0) == 'R') {
 				int reduceProductionIndex = Integer.parseInt(action.substring(1));
 				int statePopNum;
-				if(this.production.get(reduceProductionIndex).getRHS()[0].equals("ϵ")) {
+				if(this.production.get(reduceProductionIndex).getRHS()[0].equals("EPSILON")) {
 					statePopNum = 0;
 				}else {
 					statePopNum = this.production.get(reduceProductionIndex).getRHS().length;
@@ -64,7 +61,6 @@ public class Syntax_analyzer {
 					break;
 				}
 				action = this.slrTable.get(this.currentState).get(LHS);
-
 				this.currentState = Integer.parseInt(action);
 				this.stateStack.push(this.currentState);
 

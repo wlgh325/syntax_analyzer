@@ -28,12 +28,12 @@ public class ReadProduction{
         Production trashProduction = new Production(null,null);
         this.production_arr.add(trashProduction);	// To start with 1 index, add null production instance
         
-        // Remove trash buffer in first
-        int singlech = filereader.read();
+        // Remove trash buffer in first Line
+        bufReader.readLine();
         
         while((line = bufReader.readLine()) != null){
         	String[] split_str;
-        	split_str = line.split("→");	// split lhs and rhs of production
+        	split_str = line.split("->");	// split lhs and rhs of production
         	
         	Production production = new Production();
 

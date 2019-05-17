@@ -8,13 +8,11 @@ public class Main {
 
 	public static void main(String[] args) throws IOException{
 		// File path
-		String productionFile = "./src/Docs/Transition.txt";
-		String slrTableExcelFile = "./src/Docs/SLRTableFile2.xls";
-		
 		// Declare transition table and production class
 		String productionFile = "./docs/Transition.txt";
+		//String symbolTableFile = "./src/Docs/test.c.out";
 		String symbolTableFile = args[0];
-		String slrTableExcelFile = "./docs/SLRTableFile.xls";
+		String slrTableExcelFile = "./docs/SLRTableFile2.xls";
 
 		// Read excel file which contains SLR table
 		ReadTableFile readTableFile = new ReadTableFile(slrTableExcelFile);
@@ -32,16 +30,7 @@ public class Main {
 		HashMap<Integer, HashMap<String, String>> slrTable = readTableFile.getSLRTable();
 		
 		// Do SLR parsing
-		for(int i =0; i <6; i++) {
-			String symbolTableFile = "./src/Docs/test"+i+".c.out";
-			readProduction.readSymbolTableFile(symbolTableFile);
-			ArrayList<String> symbolTable = readProduction.getSymbolTable();
-			
-			
-			Syntax_analyzer syntaxAnalyzer = new Syntax_analyzer(slrTable, symbolTable, production);
-			syntaxAnalyzer.analyze();
-			symbolTable.clear();
-			
-		}
+		Syntax_analyzer syntaxAnalyzer = new Syntax_analyzer(slrTable, symbolTable, production);
+		syntaxAnalyzer.analyze();
 	}
 }

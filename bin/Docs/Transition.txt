@@ -1,29 +1,30 @@
-﻿S→CODE
-CODE→VDECL CODE
-CODE→FDECL CODE 
-CODE→ϵ
-VDECL→vtype id semi
-FDECL→vtype id lparen ARG rparen lbrace BLOCK rbrace
-ARG→vtype id MOREARGS 
-ARG→ϵ
-MOREARG→comma vtype id MOREARG
-MOREARG→ϵ
-BLOCK→STMT BLOCK
-BLOCK→ϵ
-STMT→VDECL
-STMT→id assign RHS semi
-STMT→if lparen COND rparen lbrace BLOCK rbrace else lbrace BLOCK rbrace
-STMT→while lparen COND rparen lbrace BLOCK rbrace
-STMT→FCALL semi
-RHS→EXPR
-RHS→FCALL
-RHS→literal
-EXPR→TERM addsub EXPR
-EXPR→TERM
-TERM→FACTOR multdiv TERM
-TERM→FACTOR
-FACTOR→lparen EXPR rparen
-FACTOR→id
-FACTOR→num
-FCALL→id lparen ARG rparen
-COND→FACTOR comp FACTOR
+﻿THIS_FILE_IS_SET_OF_PRODUCTION
+S->CODE
+CODE->VDECL CODE
+CODE->FDECL CODE 
+CODE->EPSILON
+VDECL->vtype id semi
+FDECL->vtype id lparen ARG rparen lbrace BLOCK rbrace
+ARG->vtype id MOREARGS 
+ARG->EPSILON
+MOREARG->comma vtype id MOREARG
+MOREARG->EPSILON
+BLOCK->STMT BLOCK
+BLOCK->EPSILON
+STMT->VDECL
+STMT->id assign RHS semi
+STMT->if lparen COND rparen lbrace BLOCK rbrace else lbrace BLOCK rbrace
+STMT->while lparen COND rparen lbrace BLOCK rbrace
+STMT->FCALL semi
+RHS->EXPR
+RHS->FCALL
+RHS->literal
+EXPR->TERM addsub EXPR
+EXPR->TERM
+TERM->FACTOR multdiv TERM
+TERM->FACTOR
+FACTOR->lparen EXPR rparen
+FACTOR->id
+FACTOR->num
+FCALL->id lparen ARG rparen
+COND->FACTOR comp FACTOR

@@ -1,117 +1,89 @@
 vtype	int	1	3
-id	add	1	7
-lparen		1	8
-vtype	int	1	11
-id	a	1	13
-comma		1	14
-vtype	int	1	18
-id	b	1	20
-rparen		1	21
-lbrace		1	23
+id	main	1	8
+lparen		1	9
+vtype	int	1	12
+id	a	1	14
+comma		1	15
+vtype	char	1	20
+id	b	1	22
+rparen		1	23
+lbrace		1	24
 vtype	int	2	7
 id	c	2	9
 semi		2	10
-id	c	3	5
-assign		3	7
-id	a	3	9
-addsub		3	11
-id	b	3	13
-semi		3	14
-rbrace		4	1
-vtype	int	6	3
-id	add10	6	9
-lparen		6	10
-vtype	int	6	13
-id	a	6	15
-rparen		6	16
-lbrace		6	17
-vtype	int	7	7
-id	c	7	9
-semi		7	10
-while	while	9	9
-lparen		9	10
-id	c	9	12
-comp	!=	9	15
-num	0	9	17
-rparen		9	18
-lbrace		9	19
-id	a	10	9
-assign		10	11
-id	a	10	13
-addsub		10	15
-num	1	10	17
-semi		10	18
-id	c	11	9
-assign		11	11
-id	c	11	13
-addsub		11	15
-num	1	11	17
-semi		11	18
-rbrace		12	5
-rbrace		14	1
-vtype	int	16	3
-id	main	16	8
-lparen		16	9
-vtype	int	16	12
-id	arg1	16	17
-comma		16	18
-vtype	char	16	23
-id	arg2	16	28
-rparen		16	29
-lbrace		16	30
-vtype	int	17	7
-id	a	17	9
-semi		17	10
+if	if	3	6
+lparen		3	7
+id	a	3	8
+comp	>=	3	11
+id	c	3	13
+rparen		3	14
+lbrace		3	15
+if	if	4	10
+lparen		4	12
+id	b	4	13
+comp	>=	4	15
+id	c	4	17
+rparen		4	18
+lbrace		4	19
+id	a	5	13
+assign		5	15
+id	b	5	17
+semi		5	18
+rbrace		6	9
+else	else	7	12
+lbrace		7	13
+id	foo	8	15
+lparen		8	16
+vtype	int	8	19
+id	a	8	21
+comma		8	22
+vtype	int	8	25
+id	b	8	27
+rparen		8	28
+semi		8	29
+rbrace		9	9
+rbrace		10	5
+else	else	10	9
+lbrace		10	10
+while	while	11	13
+lparen		11	14
+id	a	11	15
+comp	!=	11	18
+id	c	11	20
+rparen		11	21
+lbrace		11	22
+id	c	12	13
+assign		12	15
+id	c	12	17
+addsub		12	19
+num	1	12	21
+semi		12	22
+rbrace		13	9
+rbrace		14	5
+rbrace		15	1
+vtype	int	17	3
+id	foo	17	7
+lparen		17	8
+vtype	int	17	11
+id	a	17	13
+comma		17	14
+vtype	int	17	17
+id	b	17	19
+rparen		17	20
+lbrace		17	21
 vtype	int	18	7
-id	c	18	9
-semi		18	10
-vtype	char	19	8
-id	str	19	12
+id	temp	18	12
+semi		18	13
+id	temp	19	8
+assign		19	10
+id	b	19	12
 semi		19	13
-id	a	20	5
-assign		20	6
-num	10	20	8
-semi		20	9
-id	b	21	5
-assign		21	6
-num	20	21	8
-semi		21	9
-id	c	22	5
-assign		22	7
-id	add	22	11
-lparen		22	12
-vtype	int	22	15
-id	a	22	17
-comma		22	18
-vtype	int	22	21
-id	b	22	23
-rparen		22	24
-semi		22	25
-if	if	24	6
-lparen		24	8
-id	c	24	9
-comp	>	24	11
-num	10	24	14
-rparen		24	16
-lbrace		24	18
-id	str	25	11
-assign		25	13
-literal	A	25	15
-semi		25	16
-rbrace		26	5
-else	else	27	8
-lbrace		27	9
-id	str	28	11
-assign		28	13
-literal	B	28	15
-semi		28	16
-rbrace		29	5
-id	a	30	5
-assign		30	7
-id	add10	30	13
-lparen		30	14
-vtype	int	30	17
-id	a	30	19
-rparen		30	20
-semi		30	21
-rbrace		31	1
+id	b	20	5
+assign		20	7
+id	a	20	9
+semi		20	10
+id	a	21	5
+assign		21	7
+id	temp	21	12
+semi		21	13
+rbrace		22	1
