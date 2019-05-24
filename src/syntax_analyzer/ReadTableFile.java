@@ -13,7 +13,9 @@ public class ReadTableFile {
 	//SLR-TABLE
 	private HashMap<Integer, HashMap<String, String>> slrTable;
 	
+	//path is position of SLR-table file
 	private String path;
+	//totalRow and totalColumn is the number of row of SLR-table file and the number of column of specific row.
 	private int totalRow;
 	private int totalColumn;
 
@@ -26,6 +28,7 @@ public class ReadTableFile {
 	}
 
 	public void readExcel() throws IOException {
+		//SLR-table file open
 		FileInputStream fis = new FileInputStream(path);
 		HSSFWorkbook workbook = new HSSFWorkbook(fis);
 
@@ -41,15 +44,15 @@ public class ReadTableFile {
 				// get one row at a time 
 				HSSFRow row = sheet.getRow(rowindex);
 				if (row != null) {
-					// ���� ��
+					// get the number of column of the row
 					totalColumn = row.getLastCellNum();
 					HashMap<String,String> curRowHash = new HashMap<String,String>();
 					for (columnindex = 1; columnindex <= totalColumn; columnindex++) {
-						// get one cell at a time
+						// get one cell of the row at a time 
 						HSSFCell cell = sheet.getRow(rowindex).getCell((short) columnindex);
 						String value = "";
 						
-						// when the cell contains nothing ( cell is null )
+						// when the cell contains nothing ( cell is null ) 
 						if (cell == null) {
 							continue;
 						} else {
@@ -69,11 +72,13 @@ public class ReadTableFile {
 								case HSSFCell.CELL_TYPE_ERROR:
 									continue;
 							}
+							// if column of cell is less than 19, hashKey value is one of non-terminal
 							if(columnindex<19) {
 								String nonTerminal ="";
 								nonTerminal = columnIndexToNonTerminal(columnindex);
 								curRowHash.put(nonTerminal,value);
 							}else {
+								//if not, hashKey is one of terminal.
 								String terminal ="";
 								terminal = columnIndexToTerminal(columnindex);
 								curRowHash.put(terminal,value);
@@ -86,7 +91,7 @@ public class ReadTableFile {
 			}
 		}
 	}
-	
+	// this function decide what type of terminal this column is 
 	public String columnIndexToTerminal(int column) {
 		String terminal = "";
 		switch(column) {
@@ -132,6 +137,7 @@ public class ReadTableFile {
 		}
 		return terminal;
 	}
+	// this function decide what type of non-terminal this column is 
 	public String columnIndexToNonTerminal(int column) {
 		String nonTerminal = "";
 		switch(column) {
